@@ -19,8 +19,8 @@
 
 // Values to change
 long rest = 5; // The time to wait in between transmissions (in minutes).
-String Text = "PPRAA Fox Hunt Catch me if you can! See ya! XX0XXX"; // The message you want to transmit in morse code.
-String AltText = "PPRAA Fox Hunt Fox found Thanks 4 playing! XX0XXX"; // An alternate message to transmit if pin 10 is held high on startup.
+String Text = "PPRAA Fox Hunt Catch me if you can! See ya! XX0XXX"; // The message you want to transmit in morse code. Be sure to replace XX0XXX with your callsign!
+String AltText = "PPRAA Fox Hunt Fox found Thanks 4 playing! XX0XXX"; // An alternate message to transmit if pin 10 is held high on startup. Be sure to replace XX0XXX with your callsign!
 int numRepeats = 2; // Number of times to repeat the message per transmission.
 bool transmitTone = 0; // Put a 1 to play the tone at the beginning of the transmission, or a 0 to not play the tone.
 bool debug = 0; // Put a 1 to have the arduino print to the serial monitor for debugging, or a 0 for no printing.
