@@ -27,13 +27,13 @@ bool debug = 0; // Put a 1 to have the arduino print to the serial monitor for d
 
 
 // Values you can change, but shouldn't have to
-#define tonehz 600        // The approximate frequency of the tones in hz, in reality it will be a tad lower, and include lots of harmonics.
-#define dit 64            // The length of the dit in milliseconds. The dah and pauses are derived from this. The higher this number, the slower the morse code will be.
+#define tonehz 600        // The approximate frequency of the tones in hz, in reality it will be a tad lower, and include lots of harmonics. (default: 600)
+#define dit 64            // The length of the dit in milliseconds. The dah and pauses are derived from this. The higher this number, the slower the morse code will be. (default: 64)
 #define toneLength 2000   // The length of the optional beginning tone in milliseconds (every 1,000 is 1 second).
-#define audio 5           // pin 5 on the board. Controls audio output. Connected to mic on radio.
-#define tx 7              // pin 7 on the board. Controls the transmitting. Signal to 5v relay where you should have the speaker/mic pins from the radio connected.
-#define altmsg 10         // pin 10 on the board. Switches to the alternate message on board startup. Helps to have a button to hold while you reset.
-#define led 13            // pin 13 on the board. Connected to the onboard LED. Used to display a visual of the morse code being transmitted.
+#define audio 5           // pin 5 on the board. Controls audio output. Connected to mic on radio. (default: 5)
+#define tx 7              // pin 7 on the board. Controls the transmitting. Signal to 5v relay where you should have the speaker/mic pins from the radio connected. (default: 7)
+#define altmsg 10         // pin 10 on the board. Switches to the alternate message on board startup. Helps to have a button to hold while you reset. (default: 10)
+#define led 13            // pin 13 on the board. Connected to the onboard LED. Used to display a visual of the morse code being transmitted. (default: 13)
 
 
 // Values you shouldn't change
