@@ -18,18 +18,19 @@
 
 
 // Values to change
-long rest = 5; // The time to wait in between transmissions (in minutes).
+long rest = 1; // The time to wait in between transmissions (in minutes).
 String Text = "PPRAA Fox Hunt Catch me if you can! See ya! XX0XXX"; // The message you want to transmit in morse code. Be sure to replace XX0XXX with your callsign!
 String AltText = "PPRAA Fox Hunt Fox found Thanks 4 playing! XX0XXX"; // An alternate message to transmit if pin 10 is held high on startup. Be sure to replace XX0XXX with your callsign!
-int numRepeats = 2; // Number of times to repeat the message per transmission.
+int numRepeats = 3; // Number of times to repeat the message per transmission.
 bool transmitTone = 0; // Put a 1 to play the tone at the beginning of the transmission, or a 0 to not play the tone.
 bool debug = 0; // Put a 1 to have the arduino print to the serial monitor for debugging, or a 0 for no printing.
 
 
 // Values you can change, but shouldn't have to
 #define tonehz 600        // The approximate frequency of the tones in hz, in reality it will be a tad lower, and include lots of harmonics. (default: 600)
-#define dit 64            // The length of the dit in milliseconds. The dah and pauses are derived from this. The higher this number, the slower the morse code will be. (default: 64)
+#define dit 73            // The length of the dit in milliseconds. The dah and pauses are derived from this. The higher this number, the slower the morse code will be. (default: 64)
 #define toneLength 2000   // The length of the optional beginning tone in milliseconds (every 1,000 is 1 second).
+#define pttDelay 500      // The delay to let the radio start/end transmitting before/after the message. (default: 500)
 #define audio 5           // pin 5 on the board. Controls audio output. Connected to mic on radio. (default: 5)
 #define tx 7              // pin 7 on the board. Controls the transmitting. Signal to 5v relay where you should have the speaker/mic pins from the radio connected. (default: 7)
 #define altmsg 10         // pin 10 on the board. Switches to the alternate message on board startup. Helps to have a button to hold while you reset. (default: 10)
@@ -109,7 +110,9 @@ void setup() {
   msgTime *= numRepeats;
   if (transmitTone) {
     msgTime += toneLength;
+    msgTime += pttDelay;
   }
+  msgTime += (pttDelay * 2); // add ptt delay time
   Serial.print("Message: ");
   Serial.println(msg);
   Serial.print("Morse Code: ");
@@ -129,13 +132,13 @@ void setup() {
 void loop() {
   digitalWrite(tx, LOW); // Start transmitting
   digitalWrite(led, HIGH);
-  delay(500); // Delay to let radio start transmitting
+  delay(pttDelay); // Delay to let radio start transmitting
   if (transmitTone) {
     playTone(toneLength); // Optional tone at the beginning of each transmission
-    delay(500); // Delay between tone and morse code message
+    delay(pttDelay); // Delay between tone and morse code message
   }
   playCode(morseCode);
-  delay(500); // Delay to let message finish before end the transmission
+  delay(pttDelay); // Delay to let message finish before end the transmission
   digitalWrite(tx, HIGH); // Stop transmitting
   delay(rest); // Delay between transmissions
 } // End of Function: loop
